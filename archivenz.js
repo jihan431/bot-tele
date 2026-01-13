@@ -538,7 +538,7 @@ async function startWhatsAppClient() {
           if (isPNG) {
             await bot.telegram.sendPhoto(qrRequesterId, { source: qrBuffer }, {
               caption: `📱 QR CODE WHATSAPP\n\nScan QR ini di WhatsApp:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat\n\n⏳ QR berlaku 60 detik!`,
-              parse_mode: 'HTML'
+              
             });
           } else {
             // SVG: kirim sebagai document karena Telegram tidak support SVG sebagai photo
@@ -546,7 +546,7 @@ async function startWhatsAppClient() {
               { source: qrBuffer, filename: 'qrcode.svg' }, 
               {
                 caption: `📱 QR CODE WHATSAPP\n\nScan QR ini di WhatsApp:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat\n\n⏳ QR berlaku 60 detik!\n\n💡 Buka file SVG ini untuk melihat QR code`,
-                parse_mode: 'HTML'
+                
               }
             );
           }
@@ -580,7 +580,7 @@ async function startWhatsAppClient() {
                 try {
                     await bot.telegram.sendMessage(qrRequesterId, 
                         `✅ WHATSAPP TERHUBUNG!\n\nBot sekarang sudah terhubung ke WhatsApp dan siap digunakan.`,
-                        { parse_mode: 'HTML' }
+                        {  }
                     );
                 } catch (e) {}
             }
@@ -714,12 +714,12 @@ async function handleBioCheck(ctx, numbersToCheck) {
   }
 
   if (!numbersToCheck || numbersToCheck.length === 0) {
-    return ctx.reply(`Mana nomor yang mau dicek?`, { parse_mode: 'HTML' });
+    return ctx.reply(`Mana nomor yang mau dicek?`, {  });
   }
 
   await ctx.reply(
     `⏳ Tunggu sebentar, bot sedang mengecek ${numbersToCheck.length} nomor...`,
-    { parse_mode: 'HTML' }
+    {  }
   );
 
   let results = [];
@@ -834,7 +834,7 @@ async function handleBioCheck(ctx, numbersToCheck) {
 
   await ctx.replyWithDocument(
     { source: filename },
-    { caption: `📁 Nih hasil cek bio kamu (${numbersToCheck.length} nomor)`, parse_mode: 'HTML' }
+    { caption: `📁 Nih hasil cek bio kamu (${numbersToCheck.length} nomor)`,  }
   );
 
   fs.unlinkSync(filename);
@@ -973,7 +973,7 @@ bot.on('inline_query', async (ctx) => {
         description: 'Ajak teman pakai bot keren ini',
         input_message_content: {
           message_text: `🤖 CEK BIO META BOT\n\n� Bot keren untuk:\n• Cek bio WhatsApp\n• Buat ID Card Telegram\n• Fix Merah WhatsApp\n• Upload file ke URL\n\n🔗 Coba sekarang: @${botUsername}\n\nby ffek`,
-          parse_mode: 'HTML'
+          
         }
       },
       {
@@ -983,7 +983,7 @@ bot.on('inline_query', async (ctx) => {
         description: 'Undang teman & dapat bonus!',
         input_message_content: {
           message_text: `🎁 Gabung Bot Keren Ini!\n\n📱 Fitur unggulan:\n• Cek bio WhatsApp massal\n• Generate ID Card Telegram\n• Fix akun WhatsApp banned\n• Dan masih banyak lagi!\n\n� Join sekarang:\nhttps://t.me/${botUsername}?start=ref_${userId}\n\nDiundang oleh ${userName}`,
-          parse_mode: 'HTML'
+          
         }
       }
     ];
@@ -1069,7 +1069,7 @@ bot.command('fixred', async (ctx) => {
     if (!isPremium(userId) && !isOwner(userId)) {
         return ctx.reply(
             `❌ Akses Ditolak!\n\nFitur /fixred hanya untuk user premium.\nHubungi owner untuk upgrade!`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1077,7 +1077,7 @@ bot.command('fixred', async (ctx) => {
     if (!emailConfigured) {
         return ctx.reply(
             `❌ Email Belum Dikonfigurasi!\n\nOwner bot belum mengkonfigurasi email.\nHubungi: ${USERNAME_OWNER}`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1087,7 +1087,7 @@ bot.command('fixred', async (ctx) => {
         const seconds = Math.ceil(cooldown.timeLeft / 1000);
         return ctx.reply(
             `⏰ Cooldown!\n\nTunggu ${seconds} detik lagi sebelum menggunakan fitur ini.`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1095,7 +1095,7 @@ bot.command('fixred', async (ctx) => {
     if (!args) {
         return ctx.reply(
             `📝 Format Penggunaan:\n\n/fixred +628123456789\n\nMasukkan nomor WA dengan format internasional (+62...)`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1103,12 +1103,12 @@ bot.command('fixred', async (ctx) => {
     if (!phoneRegex.test(args)) {
         return ctx.reply(
             `❌ Format Nomor Salah!\n\nContoh: /fixred +628123456789`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
     // Kirim email
-    const loadingMsg = await ctx.reply(`⏳ Mengirim banding untuk ${args}...`, { parse_mode: 'HTML' });
+    const loadingMsg = await ctx.reply(`⏳ Mengirim banding untuk ${args}...`, {  });
     
     try {
         const success = await sendAppealEmail(args);
@@ -1120,7 +1120,7 @@ bot.command('fixred', async (ctx) => {
                 loadingMsg.message_id,
                 null,
                 `✅ Banding Terkirim!\n\n📞 Nomor: ${args}\n⏳ Tunggu 1-2 menit untuk proses.\n\nby ffek APPEAL`,
-                { parse_mode: 'HTML' }
+                {  }
             );
         } else {
             await ctx.telegram.editMessageText(
@@ -1128,7 +1128,7 @@ bot.command('fixred', async (ctx) => {
                 loadingMsg.message_id,
                 null,
                 `❌ Gagal Mengirim!\n\nSilakan coba lagi nanti atau hubungi owner.`,
-                { parse_mode: 'HTML' }
+                {  }
             );
         }
     } catch (error) {
@@ -1137,7 +1137,7 @@ bot.command('fixred', async (ctx) => {
             loadingMsg.message_id,
             null,
             `❌ Error System!\n\nTerjadi kesalahan. Coba lagi nanti.`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
 });
@@ -1153,7 +1153,7 @@ bot.command('setemail', async (ctx) => {
     if (args.length < 2) {
         return ctx.reply(
             `📧 Set Email Config\n\nFormat:\n/setemail email@gmail.com app_password\n\nApp password bisa didapat dari Google Account Settings`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1163,7 +1163,7 @@ bot.command('setemail', async (ctx) => {
     // Update config (note: perlu restart bot untuk apply)
     ctx.reply(
         `⚠️ Untuk mengubah email config:\n\nEdit file config.js:\n\nemail: {\n  user: "${email}",\n  pass: "${password}"\n}\n\nLalu restart bot.`,
-        { parse_mode: 'HTML' }
+        {  }
     );
 });
 
@@ -1248,7 +1248,7 @@ bot.command('testemail', async (ctx) => {
     if (!emailConfigured) {
         return ctx.reply(
             `❌ Email Belum Dikonfigurasi!\n\nEdit email config di config.js`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
     
@@ -1256,12 +1256,12 @@ bot.command('testemail', async (ctx) => {
         await emailTransporter.verify();
         ctx.reply(
             `✅ Email Test Berhasil!\n\n📧 Email: ${config.email.user}\n🔑 Status: 🟢 Terhubung`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     } catch (error) {
         ctx.reply(
             `❌ Email Test Gagal!\n\n📧 Email: ${config.email.user}\n🔴 Error: ${error.message}`,
-            { parse_mode: 'HTML' }
+            {  }
         );
     }
 });
@@ -1291,7 +1291,7 @@ bot.command('start', async (ctx) => {
           await ctx.telegram.sendMessage(
             referrerId,
             `📢 Kabar Baik!\n👤 ${userName} baru saja join menggunakan link referral kamu 🎉`,
-            { parse_mode: 'HTML' }
+            {  }
           );
         } catch (err) {
           console.warn(`⚠️ Gagal kirim notif ke ${referrerId}:`, err.message);
@@ -1325,7 +1325,7 @@ ${config.settings.footer}`;
       { source: './database/levinz.jpg' },
       {
         caption,
-        parse_mode: 'HTML',
+        ,
         ...Markup.inlineKeyboard([
           [
             { text: '⚙️ Admin Panel', callback_data: 'owner' },
@@ -1385,7 +1385,7 @@ bot.action('owner', async (ctx) => {
 └ /listowner → Daftar owner
 
 ${config.settings.footer}`,
-        parse_mode: 'HTML',
+        ,
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1421,7 +1421,7 @@ Kirim file .txt berisi daftar nomor
 untuk cek bio secara massal.
 
 ${config.settings.footer}`,
-        parse_mode: 'HTML',
+        ,
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1460,7 +1460,7 @@ bot.action('more', async (ctx) => {
     → Statistik referral kamu
 
 ${config.settings.footer}`,
-        parse_mode: 'HTML',
+        ,
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1501,7 +1501,7 @@ ${config.settings.footer}`;
       { source: './database/levinz.jpg' },
       {
         caption,
-        parse_mode: 'HTML',
+        ,
         ...Markup.inlineKeyboard([
           [
             { text: '⚙️ Admin Panel', callback_data: 'owner' },
@@ -1541,7 +1541,7 @@ bot.command('pairing', checkAccess('owner'), async (ctx) => {
         
         const code = await waClient.requestPairingCode(phoneNumber);
         await ctx.reply(`📲 Kode Pairing: ${code}\nMasukin di WA lu:\nTautkan Perangkat ═⪼ Tautkan dengan nomor telepon`, {
-          parse_mode: 'HTML'
+          
         });
     } catch (e) {
         console.error("Gagal pairing:", e);
@@ -1576,7 +1576,7 @@ bot.command('pairingqr', checkAccess('owner'), async (ctx) => {
     currentQR = null;
     
     await ctx.reply(`⏳ Memulai proses pairing QR...\n\n📱 Nomor: ${phoneNumber}\n\nSession lama dihapus. QR code akan dikirim dalam beberapa detik.\n\n� Siapkan WhatsApp kamu:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat`, {
-      parse_mode: 'HTML'
+      
     });
     
     // Restart WhatsApp client untuk generate QR
@@ -1605,7 +1605,7 @@ bot.command('pairingqr', checkAccess('owner'), async (ctx) => {
   } catch (err) {
     console.error('Error pairingqr:', err);
     await ctx.reply(`❌ Gagal generate QR: ${err.message}`, {
-      parse_mode: 'HTML'
+      
     });
   }
 });
@@ -1637,7 +1637,7 @@ bot.command('clearsesi', async (ctx) => {
     await ctx.reply(
       `🧹 Semua file di folder session sudah dihapus.\n\n` +
       `🔄 Bot akan restart otomatis dalam 3 detik...`,
-      { parse_mode: 'HTML' }
+      {  }
     );
 
     setTimeout(() => {
@@ -1673,7 +1673,7 @@ bot.command('broadcast', async (ctx) => {
   const text = ctx.message.text.split(' ').slice(1).join(' ');
   if (!text) {
     return ctx.reply(`⚠️ Gunakan format:\n\n/broadcast pesan yang ingin dikirim`, {
-      parse_mode: 'HTML'
+      
     });
   }
 
@@ -1685,7 +1685,7 @@ bot.command('broadcast', async (ctx) => {
   }
 
   await ctx.reply(`📢 Mengirim broadcast ke ${users.length} user...\nTunggu sebentar ⏳`, {
-    parse_mode: 'HTML'
+    
   });
 
   let success = 0;
@@ -1693,7 +1693,7 @@ bot.command('broadcast', async (ctx) => {
 
   for (const id of users) {
     try {
-      await ctx.telegram.sendMessage(id, text, { parse_mode: 'HTML' });
+      await ctx.telegram.sendMessage(id, text, {  });
       success++;
       await new Promise(r => setTimeout(r, 100));
     } catch (err) {
@@ -1704,7 +1704,7 @@ bot.command('broadcast', async (ctx) => {
 
   return ctx.reply(
     `✅ Broadcast selesai!\n\n📨 Terkirim: ${success}\n❌ Gagal: ${failed}`,
-    { parse_mode: 'HTML' }
+    {  }
   );
 });
 
@@ -1728,7 +1728,7 @@ bot.command('totaluser', async (ctx) => {
 
     return ctx.reply(
       `📊 Total Pengguna Bot\n\n👤 Jumlah User: ${total}`,
-      { parse_mode: 'HTML' }
+      {  }
     );
   } catch (err) {
     console.error('Gagal ambil total user:', err);
@@ -1986,7 +1986,7 @@ ${config.settings.footer}`;
       { source: './database/levinz.jpg' },
       {
         caption,
-        parse_mode: 'HTML',
+        ,
         reply_markup: {
           inline_keyboard: [
             [
@@ -2003,7 +2003,7 @@ ${config.settings.footer}`;
     console.error('Error kirim info:', err);
     ctx.reply(
       `⚠️ Terjadi kesalahan saat menampilkan info akunmu.`,
-      { parse_mode: 'HTML' }
+      {  }
     );
   }
 });
@@ -2192,7 +2192,7 @@ bot.command('tourl', async (ctx) => {
       return ctx.reply(
         `🚫 Kamu harus join channel official dulu supaya bisa pakai fitur ini.`,
         {
-          parse_mode: 'HTML',
+          ,
           ...Markup.inlineKeyboard([
             [{ text: '📢 Channel Official', url: `https://t.me/${CHANNEL_ID.replace('@', '')}` }]
           ])
@@ -2202,7 +2202,7 @@ bot.command('tourl', async (ctx) => {
 
     const reply = ctx.message.reply_to_message;
     if (!reply)
-      return ctx.reply(`❌ Balas pesan yang berisi file/audio/video dengan perintah /tourl.`, { parse_mode: 'HTML' });
+      return ctx.reply(`❌ Balas pesan yang berisi file/audio/video dengan perintah /tourl.`, {  });
 
     let fileId, filename;
     if (reply.document) {
@@ -2221,7 +2221,7 @@ bot.command('tourl', async (ctx) => {
       fileId = reply.voice.file_id;
       filename = 'voice.ogg';
     } else {
-      return ctx.reply(`❌ Pesan yang kamu balas tidak mengandung file/audio/video yang bisa diupload.`, { parse_mode: 'HTML' });
+      return ctx.reply(`❌ Pesan yang kamu balas tidak mengandung file/audio/video yang bisa diupload.`, {  });
     }
 
     const link = await ctx.telegram.getFileLink(fileId);
@@ -2232,11 +2232,11 @@ bot.command('tourl', async (ctx) => {
 
     await ctx.reply(
       `✅ File berhasil diupload ke Catbox:\n${catboxUrl}`,
-      { parse_mode: 'HTML' }
+      {  }
     );
   } catch (err) {
     console.error(err);
-    ctx.reply(`❌ Gagal upload file: ${err.message}`, { parse_mode: 'HTML' });
+    ctx.reply(`❌ Gagal upload file: ${err.message}`, {  });
   }
 });
 

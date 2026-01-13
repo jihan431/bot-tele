@@ -129,7 +129,7 @@ module.exports = async (ctx) => {
 🔗 Profil: https://t.me/${username.replace('@', '')}
 
 ${config.settings.footer}`,
-        parse_mode: 'HTML'
+        
       }
     );
 
