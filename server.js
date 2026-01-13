@@ -481,7 +481,7 @@ async function startWhatsAppClient() {
         printQRInTerminal: false,
         logger: pino({ level: 'silent' }),
         auth: state,
-        browser: ["CekBioBot", "Chrome", "1.0.0"],
+        browser: ["Ubuntu", "Chrome", "20.0.04"],
         syncFullHistory: false,
         connectTimeoutMs: 60000,
         defaultQueryTimeoutMs: 0,
