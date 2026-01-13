@@ -17,12 +17,6 @@ module.exports = {
         namabot: "cekbiometa_bot",
         footer: "by ffek",
         cekBioBatchSize: 20
-    },
-    // Email config untuk fitur /fixred (banding WA)
-    email: {
-        user: "jerapahhewan02@gmail.com",      // Ganti dengan email Gmail kamu
-        pass: "ghcnzvseatpvahwi",    
-        supportEmail: "support@whatsapp.com",
-        cooldownTime: 60000             
     }
+    // Email config dihapus - SMTP blocked by VPS provider
 };
