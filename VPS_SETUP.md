@@ -105,7 +105,7 @@ npm install
 Coba jalankan bot sebentar untuk memastikan tidak ada error.
 
 ```bash
-node archivenz.js
+node server.js
 # atau
 npm start
 ```
@@ -122,7 +122,7 @@ Agar bot tetap jalan meskipun Anda menutup terminal, gunakan **PM2**.
 npm install -g pm2
 
 # Jalankan bot
-pm2 start archivenz.js --name "bot-saya"
+pm2 start server.js --name "bot-saya"
 
 # Cek status bot
 pm2 status

@@ -146,7 +146,7 @@ async function autoBackup() {
 
     const foldersToBackup = [
       'database',
-      'archivenz.js',
+      'server.js',
       'config.js',
       'package.json'
     ];
