@@ -1008,7 +1008,9 @@ function initializeEmail() {
     }
     try {
         emailTransporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true untuk 465, false untuk 587
             auth: {
                 user: config.email.user,
                 pass: config.email.pass
