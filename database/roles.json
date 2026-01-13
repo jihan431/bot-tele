@@ -1,0 +1,41 @@
+{
+  "owners": [
+    {
+      "id": "8436266596",
+      "expireAt": "permanent",
+      "startAt": 1767809969178
+    },
+    {
+      "id": "6726423168",
+      "expireAt": "permanent",
+      "startAt": 1768127845045
+    },
+    {
+      "id": "811590280",
+      "expireAt": "permanent",
+      "startAt": 1768149938943
+    }
+  ],
+  "premiums": [
+    {
+      "id": "8115902802",
+      "expireAt": 1770740835039,
+      "startAt": 1768148835039
+    },
+    {
+      "id": "811590280",
+      "expireAt": "permanent",
+      "startAt": 1768150976376
+    },
+    {
+      "id": "8521215217",
+      "expireAt": 1768757581547,
+      "startAt": 1768152781547
+    },
+    {
+      "id": "7262119607",
+      "expireAt": 1768244860987,
+      "startAt": 1768158460987
+    }
+  ]
+}

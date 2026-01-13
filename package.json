@@ -1,0 +1,26 @@
+{
+  "name": "𝙰𝚁𝙲𝙷𝙸𝚅𝙴",
+  "version": "2.1",
+  "description": "𝙱𝙾𝚃 𝙲𝙴𝙺 𝙱𝙸𝙾 𝙰𝚁𝙲𝙷𝙸𝚅𝙴",
+  "main": "archivenz.js",
+  "scripts": {
+    "start": "node archivenz.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "npm:@otaxayun/baileys@latest",
+    "archiver": "^7.0.1",
+    "axios": "^1.12.2",
+    "chalk": "^4.1.2",
+    "firebase-admin": "^13.5.0",
+    "form-data": "^4.0.4",
+    "jimp": "^0.16.13",
+    "moment-timezone": "^0.6.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.10.1",
+    "os": "^0.1.2",
+    "pino": "^8.15.1",
+    "qrcode": "^1.5.4",
+    "telegraf": "^4.15.3",
+    "canvas": "^2.11.2"
+  }
+}
