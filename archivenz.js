@@ -834,7 +834,7 @@ async function handleBioCheck(ctx, numbersToCheck) {
 
   await ctx.replyWithDocument(
     { source: filename },
-    { caption: `<blockquote>📁 Nih hasil cek bio kamu (${numbersToCheck.length} nomor)</blockquote>`, parse_mode: 'HTML' }
+    { caption: `📁 Nih hasil cek bio kamu (${numbersToCheck.length} nomor)`, parse_mode: 'HTML' }
   );
 
   fs.unlinkSync(filename);
@@ -972,7 +972,7 @@ bot.on('inline_query', async (ctx) => {
         title: '🤖 Share Bot Ini',
         description: 'Ajak teman pakai bot keren ini',
         input_message_content: {
-          message_text: `🤖 <b>CEK BIO META BOT</b>\n\n� Bot keren untuk:\n• Cek bio WhatsApp\n• Buat ID Card Telegram\n• Fix Merah WhatsApp\n• Upload file ke URL\n\n🔗 <b>Coba sekarang:</b> @${botUsername}\n\n<i>by ffek</i>`,
+          message_text: `🤖 CEK BIO META BOT\n\n� Bot keren untuk:\n• Cek bio WhatsApp\n• Buat ID Card Telegram\n• Fix Merah WhatsApp\n• Upload file ke URL\n\n🔗 Coba sekarang: @${botUsername}\n\nby ffek`,
           parse_mode: 'HTML'
         }
       },
@@ -982,7 +982,7 @@ bot.on('inline_query', async (ctx) => {
         title: '� Share Link Referral',
         description: 'Undang teman & dapat bonus!',
         input_message_content: {
-          message_text: `🎁 <b>Gabung Bot Keren Ini!</b>\n\n📱 Fitur unggulan:\n• Cek bio WhatsApp massal\n• Generate ID Card Telegram\n• Fix akun WhatsApp banned\n• Dan masih banyak lagi!\n\n� <b>Join sekarang:</b>\nhttps://t.me/${botUsername}?start=ref_${userId}\n\n<i>Diundang oleh ${userName}</i>`,
+          message_text: `🎁 Gabung Bot Keren Ini!\n\n📱 Fitur unggulan:\n• Cek bio WhatsApp massal\n• Generate ID Card Telegram\n• Fix akun WhatsApp banned\n• Dan masih banyak lagi!\n\n� Join sekarang:\nhttps://t.me/${botUsername}?start=ref_${userId}\n\nDiundang oleh ${userName}`,
           parse_mode: 'HTML'
         }
       }
@@ -1068,7 +1068,7 @@ bot.command('fixred', async (ctx) => {
     // Cek premium atau owner
     if (!isPremium(userId) && !isOwner(userId)) {
         return ctx.reply(
-            `<blockquote>❌ <b>Akses Ditolak!</b>\n\nFitur /fixred hanya untuk user premium.\nHubungi owner untuk upgrade!</blockquote>`,
+            `❌ Akses Ditolak!\n\nFitur /fixred hanya untuk user premium.\nHubungi owner untuk upgrade!`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1076,7 +1076,7 @@ bot.command('fixred', async (ctx) => {
     // Cek email configured
     if (!emailConfigured) {
         return ctx.reply(
-            `<blockquote>❌ <b>Email Belum Dikonfigurasi!</b>\n\nOwner bot belum mengkonfigurasi email.\nHubungi: ${USERNAME_OWNER}</blockquote>`,
+            `❌ Email Belum Dikonfigurasi!\n\nOwner bot belum mengkonfigurasi email.\nHubungi: ${USERNAME_OWNER}`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1086,7 +1086,7 @@ bot.command('fixred', async (ctx) => {
     if (cooldown.onCooldown) {
         const seconds = Math.ceil(cooldown.timeLeft / 1000);
         return ctx.reply(
-            `<blockquote>⏰ <b>Cooldown!</b>\n\nTunggu ${seconds} detik lagi sebelum menggunakan fitur ini.</blockquote>`,
+            `⏰ Cooldown!\n\nTunggu ${seconds} detik lagi sebelum menggunakan fitur ini.`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1094,7 +1094,7 @@ bot.command('fixred', async (ctx) => {
     // Cek format nomor
     if (!args) {
         return ctx.reply(
-            `<blockquote>📝 <b>Format Penggunaan:</b>\n\n<code>/fixred +628123456789</code>\n\nMasukkan nomor WA dengan format internasional (+62...)</blockquote>`,
+            `📝 Format Penggunaan:\n\n/fixred +628123456789\n\nMasukkan nomor WA dengan format internasional (+62...)`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1102,13 +1102,13 @@ bot.command('fixred', async (ctx) => {
     const phoneRegex = /^\+\d{10,15}$/;
     if (!phoneRegex.test(args)) {
         return ctx.reply(
-            `<blockquote>❌ <b>Format Nomor Salah!</b>\n\nContoh: <code>/fixred +628123456789</code></blockquote>`,
+            `❌ Format Nomor Salah!\n\nContoh: /fixred +628123456789`,
             { parse_mode: 'HTML' }
         );
     }
     
     // Kirim email
-    const loadingMsg = await ctx.reply(`<blockquote>⏳ Mengirim banding untuk ${args}...</blockquote>`, { parse_mode: 'HTML' });
+    const loadingMsg = await ctx.reply(`⏳ Mengirim banding untuk ${args}...`, { parse_mode: 'HTML' });
     
     try {
         const success = await sendAppealEmail(args);
@@ -1119,7 +1119,7 @@ bot.command('fixred', async (ctx) => {
                 ctx.chat.id,
                 loadingMsg.message_id,
                 null,
-                `<blockquote>✅ <b>Banding Terkirim!</b>\n\n📞 Nomor: <code>${args}</code>\n⏳ Tunggu 1-2 menit untuk proses.\n\n<i>by ffek APPEAL</i></blockquote>`,
+                `✅ Banding Terkirim!\n\n📞 Nomor: ${args}\n⏳ Tunggu 1-2 menit untuk proses.\n\nby ffek APPEAL`,
                 { parse_mode: 'HTML' }
             );
         } else {
@@ -1127,7 +1127,7 @@ bot.command('fixred', async (ctx) => {
                 ctx.chat.id,
                 loadingMsg.message_id,
                 null,
-                `<blockquote>❌ <b>Gagal Mengirim!</b>\n\nSilakan coba lagi nanti atau hubungi owner.</blockquote>`,
+                `❌ Gagal Mengirim!\n\nSilakan coba lagi nanti atau hubungi owner.`,
                 { parse_mode: 'HTML' }
             );
         }
@@ -1136,7 +1136,7 @@ bot.command('fixred', async (ctx) => {
             ctx.chat.id,
             loadingMsg.message_id,
             null,
-            `<blockquote>❌ <b>Error System!</b>\n\nTerjadi kesalahan. Coba lagi nanti.</blockquote>`,
+            `❌ Error System!\n\nTerjadi kesalahan. Coba lagi nanti.`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1152,7 +1152,7 @@ bot.command('setemail', async (ctx) => {
     const args = ctx.message.text.split(' ').slice(1);
     if (args.length < 2) {
         return ctx.reply(
-            `<blockquote>📧 <b>Set Email Config</b>\n\nFormat:\n<code>/setemail email@gmail.com app_password</code>\n\n<i>App password bisa didapat dari Google Account Settings</i></blockquote>`,
+            `📧 Set Email Config\n\nFormat:\n/setemail email@gmail.com app_password\n\nApp password bisa didapat dari Google Account Settings`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1162,7 +1162,7 @@ bot.command('setemail', async (ctx) => {
     
     // Update config (note: perlu restart bot untuk apply)
     ctx.reply(
-        `<blockquote>⚠️ <b>Untuk mengubah email config:</b>\n\nEdit file <code>config.js</code>:\n\nemail: {\n  user: "${email}",\n  pass: "${password}"\n}\n\nLalu restart bot.</blockquote>`,
+        `⚠️ Untuk mengubah email config:\n\nEdit file config.js:\n\nemail: {\n  user: "${email}",\n  pass: "${password}"\n}\n\nLalu restart bot.`,
         { parse_mode: 'HTML' }
     );
 });
@@ -1247,7 +1247,7 @@ bot.command('testemail', async (ctx) => {
     
     if (!emailConfigured) {
         return ctx.reply(
-            `<blockquote>❌ <b>Email Belum Dikonfigurasi!</b>\n\nEdit email config di <code>config.js</code></blockquote>`,
+            `❌ Email Belum Dikonfigurasi!\n\nEdit email config di config.js`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1255,12 +1255,12 @@ bot.command('testemail', async (ctx) => {
     try {
         await emailTransporter.verify();
         ctx.reply(
-            `<blockquote>✅ <b>Email Test Berhasil!</b>\n\n📧 Email: ${config.email.user}\n🔑 Status: 🟢 Terhubung</blockquote>`,
+            `✅ Email Test Berhasil!\n\n📧 Email: ${config.email.user}\n🔑 Status: 🟢 Terhubung`,
             { parse_mode: 'HTML' }
         );
     } catch (error) {
         ctx.reply(
-            `<blockquote>❌ <b>Email Test Gagal!</b>\n\n📧 Email: ${config.email.user}\n🔴 Error: ${error.message}</blockquote>`,
+            `❌ Email Test Gagal!\n\n📧 Email: ${config.email.user}\n🔴 Error: ${error.message}`,
             { parse_mode: 'HTML' }
         );
     }
@@ -1290,7 +1290,7 @@ bot.command('start', async (ctx) => {
         try {
           await ctx.telegram.sendMessage(
             referrerId,
-            `<blockquote>📢 <b>Kabar Baik!</b>\n👤 ${userName} baru saja join menggunakan link referral kamu 🎉</blockquote>`,
+            `📢 Kabar Baik!\n👤 ${userName} baru saja join menggunakan link referral kamu 🎉`,
             { parse_mode: 'HTML' }
           );
         } catch (err) {
@@ -1302,23 +1302,23 @@ bot.command('start', async (ctx) => {
   
   // Skip member check - langsung tampilkan menu
   const caption = `━━━━━━━━━━━━━━━━━━━━━
-        ✦ <b>${config.settings.namabot.toUpperCase()}</b> ✦
+        ✦ ${config.settings.namabot.toUpperCase()} ✦
 ━━━━━━━━━━━━━━━━━━━━━
 
-<b>Hai, ${userName}!</b>
+Hai, ${userName}!
 
 Bot untuk cek bio WhatsApp dengan
 cepat, akurat, dan mudah digunakan.
 
 ┌─────────────────────
-│ <b>User Info</b>
+│ User Info
 ├─────────────────────
-│ ◈ ID: <code>${userId}</code>
-│ ◈ Uptime: <code>${wakturun}</code>
-│ ◈ Version: <code>v${VERSION}</code>
+│ ◈ ID: ${userId}
+│ ◈ Uptime: ${wakturun}
+│ ◈ Version: v${VERSION}
 └─────────────────────
 
-<i>${config.settings.footer}</i>`;
+${config.settings.footer}`;
 
   try {
     await ctx.replyWithPhoto(
@@ -1362,29 +1362,29 @@ bot.action('owner', async (ctx) => {
       { source: './database/levinz.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
-        ⚙️ <b>ADMIN PANEL</b> ⚙️
+        ⚙️ ADMIN PANEL ⚙️
 ━━━━━━━━━━━━━━━━━━━━━
 
-<b>◈ Connection</b>
+◈ Connection
 ├ /pairing → Hubungkan WhatsApp
 └ /clearsesi → Reset session
 
-<b>◈ Broadcast</b>
+◈ Broadcast
 ├ /broadcast → Kirim ke semua user
 ├ /totaluser → Lihat total pengguna
 └ /listid → Daftar semua ID
 
-<b>◈ Premium Management</b>
+◈ Premium Management
 ├ /addprem → Tambah premium
 ├ /delprem → Hapus premium
 └ /listprem → Daftar premium
 
-<b>◈ Owner Management</b>
+◈ Owner Management
 ├ /addowner → Tambah owner
 ├ /delowner → Hapus owner
 └ /listowner → Daftar owner
 
-<i>${config.settings.footer}</i>`,
+${config.settings.footer}`,
         parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
@@ -1403,11 +1403,11 @@ bot.action('whatsapp', async (ctx) => {
       { source: './database/levinz.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
-       📱 <b>WHATSAPP TOOLS</b> 📱
+       📱 WHATSAPP TOOLS 📱
 ━━━━━━━━━━━━━━━━━━━━━
 
-<b>◈ Fitur Utama</b>
-├ /cekbio <code>628xxx</code>
+◈ Fitur Utama
+├ /cekbio 628xxx
 │   → Cek bio nomor WhatsApp
 │
 ├ /info
@@ -1416,11 +1416,11 @@ bot.action('whatsapp', async (ctx) => {
 └ /fixred
     → Banding WA (Premium)
 
-<b>◈ Tips</b>
+◈ Tips
 Kirim file .txt berisi daftar nomor
 untuk cek bio secara massal.
 
-<i>${config.settings.footer}</i>`,
+${config.settings.footer}`,
         parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
@@ -1439,10 +1439,10 @@ bot.action('more', async (ctx) => {
       { source: './database/levinz.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
-       📦 <b>FITUR LAINNYA</b> 📦
+       📦 FITUR LAINNYA 📦
 ━━━━━━━━━━━━━━━━━━━━━
 
-<b>◈ Utilities</b>
+◈ Utilities
 ├ /cekid
 │   → Cek ID Telegram kamu
 │
@@ -1452,14 +1452,14 @@ bot.action('more', async (ctx) => {
 └ /myinfo
     → Lihat info akun kamu
 
-<b>◈ Referral</b>
+◈ Referral
 ├ /referral
 │   → Dapatkan link referral
 │
 └ /mystats
     → Statistik referral kamu
 
-<i>${config.settings.footer}</i>`,
+${config.settings.footer}`,
         parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
@@ -1479,23 +1479,23 @@ bot.action('back_to_start', async (ctx) => {
     const wakturun = getUptime();
 
     const caption = `━━━━━━━━━━━━━━━━━━━━━
-        ✦ <b>${config.settings.namabot.toUpperCase()}</b> ✦
+        ✦ ${config.settings.namabot.toUpperCase()} ✦
 ━━━━━━━━━━━━━━━━━━━━━
 
-<b>Hai, ${userName}!</b>
+Hai, ${userName}!
 
 Bot untuk cek bio WhatsApp dengan
 cepat, akurat, dan mudah digunakan.
 
 ┌─────────────────────
-│ <b>User Info</b>
+│ User Info
 ├─────────────────────
-│ ◈ ID: <code>${userId}</code>
-│ ◈ Uptime: <code>${wakturun}</code>
-│ ◈ Version: <code>v${VERSION}</code>
+│ ◈ ID: ${userId}
+│ ◈ Uptime: ${wakturun}
+│ ◈ Version: v${VERSION}
 └─────────────────────
 
-<i>${config.settings.footer}</i>`;
+${config.settings.footer}`;
 
     await ctx.replyWithPhoto(
       { source: './database/levinz.jpg' },
@@ -1526,26 +1526,26 @@ cepat, akurat, dan mudah digunakan.
 
 bot.command('pairing', checkAccess('owner'), async (ctx) => {
     const phoneNumber = ctx.message.text.split(' ')[1]?.replace(/[^0-9]/g, '');
-    if (!phoneNumber) return ctx.reply(`<blockquote>Formatnya Salah Idiot.\nContoh: /pairing 628×××...</blockquote>`, {
+    if (!phoneNumber) return ctx.reply(`Formatnya Salah Idiot.\nContoh: /pairing 628×××...`, {
       parse_mode: "HTML"
     });
     
-    if (!waClient) return ctx.reply(`<blockquote>Koneksi WA lagi down, sabar bentar.</blockquote>`, {
+    if (!waClient) return ctx.reply(`Koneksi WA lagi down, sabar bentar.`, {
       parse_mode: "HTML"
     });
     
     try {
-        await ctx.reply(`<blockquote>Menunggu kode pairing...</blockquote>`, {
+        await ctx.reply(`Menunggu kode pairing...`, {
           parse_mode: "HTML"
         });
         
         const code = await waClient.requestPairingCode(phoneNumber);
-        await ctx.reply(`<blockquote>📲 Kode Pairing: <code>${code}</code>\nMasukin di WA lu:\nTautkan Perangkat ═⪼ Tautkan dengan nomor telepon</blockquote>`, {
+        await ctx.reply(`📲 Kode Pairing: ${code}\nMasukin di WA lu:\nTautkan Perangkat ═⪼ Tautkan dengan nomor telepon`, {
           parse_mode: 'HTML'
         });
     } catch (e) {
         console.error("Gagal pairing:", e);
-        await ctx.reply(`<blockquote>Gagal minta pairing code, Coba lagi ntar.</blockquote>`, {
+        await ctx.reply(`Gagal minta pairing code, Coba lagi ntar.`, {
           parse_mode: "HTML"
         });
     }
@@ -1557,7 +1557,7 @@ bot.command('pairingqr', checkAccess('owner'), async (ctx) => {
   const phoneNumber = ctx.message.text.split(' ')[1]?.replace(/[^0-9]/g, '');
   
   if (!phoneNumber) {
-    return ctx.reply(`<blockquote>⚠️ <b>Format salah!</b>\n\nContoh: <code>/pairingqr 628xxxxxxxxxx</code></blockquote>`, {
+    return ctx.reply(`⚠️ Format salah!\n\nContoh: /pairingqr 628xxxxxxxxxx`, {
       parse_mode: "HTML"
     });
   }
@@ -1575,7 +1575,7 @@ bot.command('pairingqr', checkAccess('owner'), async (ctx) => {
     qrRequesterId = chatId;
     currentQR = null;
     
-    await ctx.reply(`<blockquote>⏳ <b>Memulai proses pairing QR...</b>\n\n📱 Nomor: <code>${phoneNumber}</code>\n\nSession lama dihapus. QR code akan dikirim dalam beberapa detik.\n\n� Siapkan WhatsApp kamu:\n<b>Pengaturan → Perangkat Tertaut → Tautkan Perangkat</b></blockquote>`, {
+    await ctx.reply(`⏳ Memulai proses pairing QR...\n\n📱 Nomor: ${phoneNumber}\n\nSession lama dihapus. QR code akan dikirim dalam beberapa detik.\n\n� Siapkan WhatsApp kamu:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat`, {
       parse_mode: 'HTML'
     });
     
@@ -1604,7 +1604,7 @@ bot.command('pairingqr', checkAccess('owner'), async (ctx) => {
     
   } catch (err) {
     console.error('Error pairingqr:', err);
-    await ctx.reply(`<blockquote>❌ Gagal generate QR: ${err.message}</blockquote>`, {
+    await ctx.reply(`❌ Gagal generate QR: ${err.message}`, {
       parse_mode: 'HTML'
     });
   }
@@ -1615,7 +1615,7 @@ bot.command('clearsesi', async (ctx) => {
   const sessionDir = path.join(__dirname, 'session');
 
   if (!isOwner(userId)) {
-    return ctx.reply(`<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini.</blockquote>`, {
+    return ctx.reply(`🚫 Hanya owner yang bisa menjalankan perintah ini.`, {
       parse_mode: "HTML"
     });
   }
@@ -1635,8 +1635,8 @@ bot.command('clearsesi', async (ctx) => {
     fs.mkdirSync(sessionDir, { recursive: true });
 
     await ctx.reply(
-      `<blockquote>🧹 Semua file di folder <code>session</code> sudah dihapus.</blockquote>\n\n` +
-      `<blockquote>🔄 Bot akan restart otomatis dalam 3 detik...</blockquote>`,
+      `🧹 Semua file di folder session sudah dihapus.\n\n` +
+      `🔄 Bot akan restart otomatis dalam 3 detik...`,
       { parse_mode: 'HTML' }
     );
 
@@ -1665,26 +1665,26 @@ bot.command('broadcast', async (ctx) => {
   const userId = ctx.from.id.toString();
 
   if (!isOwner(userId)) {
-    return ctx.reply(`<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini.</blockquote>`, {
+    return ctx.reply(`🚫 Hanya owner yang bisa menjalankan perintah ini.`, {
       parse_mode: "HTML"
     });
   }
 
   const text = ctx.message.text.split(' ').slice(1).join(' ');
   if (!text) {
-    return ctx.reply(`<blockquote>⚠️ Gunakan format:\n\n<b>/broadcast</b> pesan yang ingin dikirim</blockquote>`, {
+    return ctx.reply(`⚠️ Gunakan format:\n\n/broadcast pesan yang ingin dikirim`, {
       parse_mode: 'HTML'
     });
   }
 
   const users = loadUsers();
   if (users.length === 0) {
-    return ctx.reply(`<blockquote>📭 Belum ada user private yang tercatat.</blockquote>`, {
+    return ctx.reply(`📭 Belum ada user private yang tercatat.`, {
       parse_mode: "HTML"
     });
   }
 
-  await ctx.reply(`<blockquote>📢 Mengirim broadcast ke <b>${users.length}</b> user...\nTunggu sebentar ⏳</blockquote>`, {
+  await ctx.reply(`📢 Mengirim broadcast ke ${users.length} user...\nTunggu sebentar ⏳`, {
     parse_mode: 'HTML'
   });
 
@@ -1703,7 +1703,7 @@ bot.command('broadcast', async (ctx) => {
   }
 
   return ctx.reply(
-    `<blockquote>✅ Broadcast selesai!\n\n📨 Terkirim: <b>${success}</b>\n❌ Gagal: <b>${failed}</b></blockquote>`,
+    `✅ Broadcast selesai!\n\n📨 Terkirim: ${success}\n❌ Gagal: ${failed}`,
     { parse_mode: 'HTML' }
   );
 });
@@ -1712,7 +1712,7 @@ bot.command('totaluser', async (ctx) => {
   const userId = ctx.from.id.toString();
 
   if (!isOwner(userId)) {
-    return ctx.reply(`<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini.</blockquote>`, {
+    return ctx.reply(`🚫 Hanya owner yang bisa menjalankan perintah ini.`, {
       parse_mode: "HTML"
     });
   }
@@ -1727,7 +1727,7 @@ bot.command('totaluser', async (ctx) => {
     const total = users.length;
 
     return ctx.reply(
-      `<blockquote>📊 <b>Total Pengguna Bot</b>\n\n👤 Jumlah User: <b>${total}</b></blockquote>`,
+      `📊 Total Pengguna Bot\n\n👤 Jumlah User: ${total}`,
       { parse_mode: 'HTML' }
     );
   } catch (err) {
@@ -1739,12 +1739,12 @@ bot.command('totaluser', async (ctx) => {
 bot.command("listid", async (ctx) => {
   const fromId = ctx.from.id.toString();
   if (!isOwner(fromId))
-    return ctx.reply("<blockquote>🚫 Hanya owner yang bisa melihat total ID!</blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("🚫 Hanya owner yang bisa melihat total ID!", { parse_mode: "HTML" });
 
   const users = loadUsers();
 
   if (users.length === 0)
-    return ctx.reply("<blockquote>📭 <b>Belum ada user terdaftar.</b></blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("📭 Belum ada user terdaftar.", { parse_mode: "HTML" });
 
   const { text, buttons } = generateUserList(users, 1);
 
@@ -1756,7 +1756,7 @@ bot.command("listid", async (ctx) => {
 
 bot.command("addprem", async (ctx) => {
   const fromId = ctx.from.id.toString();
-  if (!isOwner(fromId)) return ctx.reply("<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini.!</blockquote>", {
+  if (!isOwner(fromId)) return ctx.reply("🚫 Hanya owner yang bisa menjalankan perintah ini.!", {
     parse_mode: "HTML"
   });
 
@@ -1766,12 +1766,12 @@ bot.command("addprem", async (ctx) => {
 
   if (!targetId || !durasi)
     return ctx.reply(
-      "<blockquote>⚠️ Gunakan format:\n<code>/addprem user_id durasi</code>\n\n🧩 Contoh:\n<code>/addprem 12345678 7d</code>\n<code>/addprem 12345678 1m</code>\n<code>/addprem 12345678 p</code></blockquote>",
+      "⚠️ Gunakan format:\n/addprem user_id durasi\n\n🧩 Contoh:\n/addprem 12345678 7d\n/addprem 12345678 1m\n/addprem 12345678 p",
       { parse_mode: "HTML" }
     );
 
   const expireAt = parseDuration(durasi);
-  if (!expireAt) return ctx.reply(`<blockquote>⚠️ Durasi tidak valid! Gunakan d/w/m/p.</blockquote>`, {
+  if (!expireAt) return ctx.reply(`⚠️ Durasi tidak valid! Gunakan d/w/m/p.`, {
     parse_mode: "HTML"
   });
 
@@ -1782,12 +1782,12 @@ bot.command("addprem", async (ctx) => {
 
   const waktu = formatDuration(expireAt);
 
-  await ctx.reply(`<blockquote>✨ User <code>${targetId}</code> sekarang Premium selama <b>${waktu}</b>!</blockquote>`, { parse_mode: "HTML" });
+  await ctx.reply(`✨ User ${targetId} sekarang Premium selama ${waktu}!`, { parse_mode: "HTML" });
 
   try {
     await ctx.telegram.sendMessage(
       targetId,
-      `<blockquote>🎉 <b>Selamat!</b>\nAnda telah menjadi <b>Premium User</b>!\n\n🕒 Waktu aktif: <b>${waktu}</b>\n\nSelamat menggunakan layanan bot kami 🚀</blockquote>`,
+      `🎉 Selamat!\nAnda telah menjadi Premium User!\n\n🕒 Waktu aktif: ${waktu}\n\nSelamat menggunakan layanan bot kami 🚀`,
       { parse_mode: "HTML" }
     );
   } catch {
@@ -1797,7 +1797,7 @@ bot.command("addprem", async (ctx) => {
 
 bot.command("delprem", async (ctx) => {
   const fromId = ctx.from.id.toString();
-  if (!isOwner(fromId)) return ctx.reply(`<blockquote>🚫 Hanya owner yang bisa menghapus user premium.</blockquote>`, {
+  if (!isOwner(fromId)) return ctx.reply(`🚫 Hanya owner yang bisa menghapus user premium.`, {
     parse_mode: "HTML"
   });
 
@@ -1806,7 +1806,7 @@ bot.command("delprem", async (ctx) => {
 
   if (!targetId)
     return ctx.reply(
-      "<blockquote>⚠️ Gunakan format:\n<code>/delprem user_id</code>\n\n🧩 Contoh:\n<code>/delprem 12345678</code></blockquote>",
+      "⚠️ Gunakan format:\n/delprem user_id\n\n🧩 Contoh:\n/delprem 12345678",
       { parse_mode: "HTML" }
     );
 
@@ -1815,19 +1815,19 @@ bot.command("delprem", async (ctx) => {
   saveRoles();
 
   if (roleData.premiums.length === before)
-    return ctx.reply(`<blockquote>❌ User <code>${targetId}</code> tidak ditemukan di daftar premium.</blockquote>`, { parse_mode: "HTML" });
+    return ctx.reply(`❌ User ${targetId} tidak ditemukan di daftar premium.`, { parse_mode: "HTML" });
 
-  ctx.reply(`<blockquote>✅ User <code>${targetId}</code> telah dihapus dari daftar Premium.</blockquote>`, { parse_mode: "HTML" });
+  ctx.reply(`✅ User ${targetId} telah dihapus dari daftar Premium.`, { parse_mode: "HTML" });
 });
 
 bot.command("listprem", async (ctx) => {
   const userId = ctx.from.id.toString();
   if (!isOwner(userId))
-    return ctx.reply("<blockquote>🚫 Hanya owner yang bisa melihat daftar Premium!</blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("🚫 Hanya owner yang bisa melihat daftar Premium!", { parse_mode: "HTML" });
 
   const data = roleData.premiums.filter(p => !isExpired(p.expireAt));
   if (data.length === 0)
-    return ctx.reply("<blockquote>📭 Belum ada user Premium aktif.</blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("📭 Belum ada user Premium aktif.", { parse_mode: "HTML" });
 
   const { text, buttons } = generatePagedList(data, 1, "premium");
 
@@ -1840,7 +1840,7 @@ bot.command("listprem", async (ctx) => {
 bot.command("addowner", async (ctx) => {
   const fromId = ctx.from.id.toString();
 
-  if (!isOwner(fromId)) return ctx.reply("<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini!</blockquote>", {
+  if (!isOwner(fromId)) return ctx.reply("🚫 Hanya owner yang bisa menjalankan perintah ini!", {
     parse_mode: "HTML"
   });
 
@@ -1850,13 +1850,13 @@ bot.command("addowner", async (ctx) => {
 
   if (!targetId || !durasi)
     return ctx.reply(
-      "<blockquote>⚠️ Gunakan format:\n<code>/addowner user_id durasi</code>\n\n🧩 Contoh:\n<code>/addowner 12345678 7d</code>\n<code>/addowner 12345678 1m</code>\n<code>/addowner 12345678 p</code></blockquote>",
+      "⚠️ Gunakan format:\n/addowner user_id durasi\n\n🧩 Contoh:\n/addowner 12345678 7d\n/addowner 12345678 1m\n/addowner 12345678 p",
       { parse_mode: "HTML" }
     );
   
   // Validasi ID harus angka
   if (!/^\d+$/.test(targetId)) {
-      return ctx.reply("<blockquote>⚠️ <b>ID tidak valid!</b>\nHarus berupa angka (User ID), bukan username.\n\nMinta user ketik <code>/cekid</code> untuk melihat ID mereka.</blockquote>", { parse_mode: "HTML" });
+      return ctx.reply("⚠️ ID tidak valid!\nHarus berupa angka (User ID), bukan username.\n\nMinta user ketik /cekid untuk melihat ID mereka.", { parse_mode: "HTML" });
   }
 
   const expireAt = parseDuration(durasi);
@@ -1868,16 +1868,16 @@ bot.command("addowner", async (ctx) => {
 
   const waktu = formatDuration(expireAt);
 
-  await ctx.reply(`<blockquote>✅ User <code>${targetId}</code> berhasil jadi *Owner* selama <b>${waktu}</b>!</blockquote>`, { parse_mode: "HTML" });
+  await ctx.reply(`✅ User ${targetId} berhasil jadi *Owner* selama ${waktu}!`, { parse_mode: "HTML" });
 
   try {
     await ctx.telegram.sendMessage(
       targetId,
-      `<blockquote>👑 <b>Selamat!</b>\nAnda telah menjadi <b>Owner Bot</b>!\n\n🕒 Waktu aktif: <b>${waktu}</b>\n\nSelamat menikmati fitur eksklusif kami 🙌</blockquote>`,
+      `👑 Selamat!\nAnda telah menjadi Owner Bot!\n\n🕒 Waktu aktif: ${waktu}\n\nSelamat menikmati fitur eksklusif kami 🙌`,
       { parse_mode: "HTML" }
     );
   } catch {
-    ctx.reply("<blockquote>⚠️ Tidak bisa kirim pesan ke user (mungkin belum start bot).</blockquote>", {
+    ctx.reply("⚠️ Tidak bisa kirim pesan ke user (mungkin belum start bot).", {
       parse_mode: "HTML"
     });
   }
@@ -1887,7 +1887,7 @@ bot.command("delowner", async (ctx) => {
   const fromId = ctx.from.id.toString();
 
   if (!isOwner(fromId))
-    return ctx.reply("<blockquote>🚫 Hanya owner yang bisa menjalankan perintah ini!</blockquote>", {
+    return ctx.reply("🚫 Hanya owner yang bisa menjalankan perintah ini!", {
     parse_mode: "HTML"
   });
 
@@ -1896,7 +1896,7 @@ bot.command("delowner", async (ctx) => {
 
   if (!targetId)
     return ctx.reply(
-      "<blockquote>⚠️ Gunakan format:\n<code>/delowner user_id</code>\n\n🧩 Contoh:\n<code>/delowner 12345678</code></blockquote>",
+      "⚠️ Gunakan format:\n/delowner user_id\n\n🧩 Contoh:\n/delowner 12345678",
       { parse_mode: "HTML" }
     );
 
@@ -1905,20 +1905,20 @@ bot.command("delowner", async (ctx) => {
   saveRoles();
 
   if (roleData.owners.length === before)
-    return ctx.reply(`<blockquote>❌ User <code>${targetId}</code> tidak ditemukan di daftar owner.</blockquote>`, { parse_mode: "HTML" });
+    return ctx.reply(`❌ User ${targetId} tidak ditemukan di daftar owner.`, { parse_mode: "HTML" });
 
-  ctx.reply(`<blockquote>✅ User <code>${targetId}</code> telah dihapus dari daftar Owner.</blockquote>`, { parse_mode: "HTML" });
+  ctx.reply(`✅ User ${targetId} telah dihapus dari daftar Owner.`, { parse_mode: "HTML" });
 });
 
 bot.command("listowner", async (ctx) => {
   const userId = ctx.from.id.toString();
 
   if (!isOwner(userId))
-    return ctx.reply("<blockquote>🚫 Hanya owner yang bisa melihat daftar Owner!</blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("🚫 Hanya owner yang bisa melihat daftar Owner!", { parse_mode: "HTML" });
 
   const data = roleData.owners.filter(o => !isExpired(o.expireAt));
   if (data.length === 0)
-    return ctx.reply("<blockquote>📭 Belum ada owner tambahan aktif.</blockquote>", { parse_mode: "HTML" });
+    return ctx.reply("📭 Belum ada owner tambahan aktif.", { parse_mode: "HTML" });
 
   const { text, buttons } = generatePagedList(data, 1, "owner");
 
@@ -1954,32 +1954,32 @@ bot.command('info', async (ctx) => {
   const totalKlaim = userRef.totalInvited;
 
   const caption = `━━━━━━━━━━━━━━━━━━━━━
-    📊 <b>INFORMASI AKUN</b> 📊
+    📊 INFORMASI AKUN 📊
 ━━━━━━━━━━━━━━━━━━━━━
 
 ┌─────────────────────
-│ <b>Profile</b>
+│ Profile
 ├─────────────────────
 │ ◈ Nama: ${userName}
-│ ◈ ID: <code>${userId}</code>
+│ ◈ ID: ${userId}
 │ ◈ Premium: ${premiumStatus}
 │ ◈ Owner: ${ownerStatus}
 └─────────────────────
 
 ┌─────────────────────
-│ <b>Referral Stats</b>
+│ Referral Stats
 ├─────────────────────
 │ ◈ Bonus Tersisa: ${sisaBonus}x
 │ ◈ Total Undangan: ${jumlahUndangan}
 │ ◈ Bonus Diklaim: ${totalKlaim}
 └─────────────────────
 
-<b>Link Referral:</b>
-<code>${referralLink}</code>
+Link Referral:
+${referralLink}
 
-<i>Undang 5 teman = 5x cek 150 nomor!</i>
+Undang 5 teman = 5x cek 150 nomor!
 
-<i>${config.settings.footer}</i>`;
+${config.settings.footer}`;
 
   try {
     await ctx.replyWithPhoto(
@@ -2002,7 +2002,7 @@ bot.command('info', async (ctx) => {
   } catch (err) {
     console.error('Error kirim info:', err);
     ctx.reply(
-      `<blockquote>⚠️ Terjadi kesalahan saat menampilkan info akunmu.</blockquote>`,
+      `⚠️ Terjadi kesalahan saat menampilkan info akunmu.`,
       { parse_mode: 'HTML' }
     );
   }
@@ -2028,7 +2028,7 @@ bot.command('cekbio', async (ctx) => {
         const remaining = cooldownTime - (now - cooldowns[userId]);
         const minutes = Math.ceil(remaining / 60000);
         return ctx.reply(
-          `<blockquote>⏳ Tunggu <b>${minutes} menit</b> sebelum pakai /cekbio lagi.</blockquote>`,
+          `⏳ Tunggu ${minutes} menit sebelum pakai /cekbio lagi.`,
           { parse_mode: "HTML" }
         );
       }
@@ -2061,11 +2061,11 @@ bot.command('cekbio', async (ctx) => {
 
       if (notJoined.length > 0) {
         const buttons = notJoined.map(i => ({ text: `Join ${i.name}`, url: i.url }));
-        let msg = `<blockquote>🚫 <b>Kamu belum join semua tempat wajib!</b>\n`;
+        let msg = `🚫 Kamu belum join semua tempat wajib!\n`;
         notJoined.forEach(i => {
-           msg += `👉 <a href="${i.url}">${i.name}</a>\n`; 
+           msg += `👉 ${i.name}\n`; 
         });
-        msg += `</blockquote>`;
+        msg += ``;
         
         return ctx.reply(msg, {
             parse_mode: "HTML",
@@ -2084,8 +2084,8 @@ bot.command('cekbio', async (ctx) => {
         saveRefs(refData);
 
         await ctx.reply(
-          `<blockquote>🎉 <b>Selamat!</b> Kamu telah mengundang ${invitedCount} orang.
-🎁 Dapat <b>5x kesempatan cek 150 nomor!</b></blockquote>`,
+          `🎉 Selamat! Kamu telah mengundang ${invitedCount} orang.
+🎁 Dapat 5x kesempatan cek 150 nomor!`,
           { parse_mode: "HTML" }
         );
       }
@@ -2093,9 +2093,9 @@ bot.command('cekbio', async (ctx) => {
       if (invitedCount < 5 && refData[userId].bonusChecks <= 0) {
         const referralLink = `https://t.me/${ctx.botInfo.username}?start=ref_${userId}`;
         return ctx.reply(
-          `<blockquote>🚫 <b>Kamu baru mengundang ${invitedCount} orang.</b>
-Untuk memakai fitur ini, undang <b>minimal 5 orang</b> dulu.
-🔗 <b>Link Undanganmu:</b> <a href="${referralLink}">${referralLink}</a></blockquote>`,
+          `🚫 Kamu baru mengundang ${invitedCount} orang.
+Untuk memakai fitur ini, undang minimal 5 orang dulu.
+🔗 Link Undanganmu: ${referralLink}`,
           { parse_mode: "HTML", disable_web_page_preview: true }
         );
       }
@@ -2129,7 +2129,7 @@ Untuk memakai fitur ini, undang <b>minimal 5 orang</b> dulu.
     const jumlahNomor = numbersToCheck.length;
 
     if (jumlahNomor === 0) {
-      return ctx.reply(`<blockquote>⚠️ Masukkan nomor yang ingin dicek.</blockquote>`, { parse_mode: "HTML" });
+      return ctx.reply(`⚠️ Masukkan nomor yang ingin dicek.`, { parse_mode: "HTML" });
     }
 
     let maxNumbers = 80;
@@ -2143,7 +2143,7 @@ Untuk memakai fitur ini, undang <b>minimal 5 orang</b> dulu.
 
     if (jumlahNomor > maxNumbers) {
       return ctx.reply(
-        `<blockquote>⚠️ Maksimal <b>${maxNumbers}</b> nomor yang bisa dicek.</blockquote>`,
+        `⚠️ Maksimal ${maxNumbers} nomor yang bisa dicek.`,
         { parse_mode: "HTML" }
       );
     }
@@ -2159,8 +2159,8 @@ Untuk memakai fitur ini, undang <b>minimal 5 orang</b> dulu.
     }
 
     const msg = pakaiBonus
-      ? `<blockquote>✅ Cek ${jumlahNomor} nomor selesai!\n📊 Sisa bonus cek 150 nomor: <b>${refData[userId].bonusChecks}</b></blockquote>`
-      : `<blockquote>✅ Cek ${jumlahNomor} nomor selesai!</blockquote>`;
+      ? `✅ Cek ${jumlahNomor} nomor selesai!\n📊 Sisa bonus cek 150 nomor: ${refData[userId].bonusChecks}`
+      : `✅ Cek ${jumlahNomor} nomor selesai!`;
 
     await ctx.reply(msg, { parse_mode: "HTML" });
 
@@ -2169,7 +2169,7 @@ Untuk memakai fitur ini, undang <b>minimal 5 orang</b> dulu.
   } catch (err) {
     console.error('Error cekbio:', err);
     return ctx.reply(
-      `<blockquote>⚠️ Terjadi kesalahan saat memeriksa nomor.\n🔁 Bonus kamu tidak berkurang.</blockquote>`,
+      `⚠️ Terjadi kesalahan saat memeriksa nomor.\n🔁 Bonus kamu tidak berkurang.`,
       { parse_mode: "HTML" }
     );
   }
@@ -2190,7 +2190,7 @@ bot.command('tourl', async (ctx) => {
     const member = await ctx.telegram.getChatMember(CHANNEL_ID, userId);
     if (['left', 'kicked'].includes(member.status)) {
       return ctx.reply(
-        `<blockquote>🚫 Kamu harus join channel official dulu supaya bisa pakai fitur ini.</blockquote>`,
+        `🚫 Kamu harus join channel official dulu supaya bisa pakai fitur ini.`,
         {
           parse_mode: 'HTML',
           ...Markup.inlineKeyboard([
@@ -2202,7 +2202,7 @@ bot.command('tourl', async (ctx) => {
 
     const reply = ctx.message.reply_to_message;
     if (!reply)
-      return ctx.reply(`<blockquote>❌ Balas pesan yang berisi file/audio/video dengan perintah /tourl.</blockquote>`, { parse_mode: 'HTML' });
+      return ctx.reply(`❌ Balas pesan yang berisi file/audio/video dengan perintah /tourl.`, { parse_mode: 'HTML' });
 
     let fileId, filename;
     if (reply.document) {
@@ -2221,7 +2221,7 @@ bot.command('tourl', async (ctx) => {
       fileId = reply.voice.file_id;
       filename = 'voice.ogg';
     } else {
-      return ctx.reply(`<blockquote>❌ Pesan yang kamu balas tidak mengandung file/audio/video yang bisa diupload.</blockquote>`, { parse_mode: 'HTML' });
+      return ctx.reply(`❌ Pesan yang kamu balas tidak mengandung file/audio/video yang bisa diupload.`, { parse_mode: 'HTML' });
     }
 
     const link = await ctx.telegram.getFileLink(fileId);
@@ -2231,12 +2231,12 @@ bot.command('tourl', async (ctx) => {
     const catboxUrl = await uploadToCatbox(fileBuffer, filename);
 
     await ctx.reply(
-      `<blockquote>✅ File berhasil diupload ke Catbox:\n${catboxUrl}</blockquote>`,
+      `✅ File berhasil diupload ke Catbox:\n${catboxUrl}`,
       { parse_mode: 'HTML' }
     );
   } catch (err) {
     console.error(err);
-    ctx.reply(`<blockquote>❌ Gagal upload file: ${err.message}</blockquote>`, { parse_mode: 'HTML' });
+    ctx.reply(`❌ Gagal upload file: ${err.message}`, { parse_mode: 'HTML' });
   }
 });
 
