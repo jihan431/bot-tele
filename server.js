@@ -1983,10 +1983,9 @@ ${config.settings.footer}`;
 
   try {
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption,
-        ,
         reply_markup: {
           inline_keyboard: [
             [
@@ -2192,7 +2191,7 @@ bot.command('tourl', async (ctx) => {
       return ctx.reply(
         `🚫 Kamu harus join channel official dulu supaya bisa pakai fitur ini.`,
         {
-          ,
+          parse_mode: 'HTML',
           ...Markup.inlineKeyboard([
             [{ text: '📢 Channel Official', url: `https://t.me/${CHANNEL_ID.replace('@', '')}` }]
           ])
