@@ -1322,10 +1322,10 @@ ${config.settings.footer}`;
 
   try {
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption,
-        ,
+        parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [
             { text: '⚙️ Admin Panel', callback_data: 'owner' },
@@ -1359,7 +1359,7 @@ bot.action('owner', async (ctx) => {
   try {
     await ctx.deleteMessage();
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
         ⚙️ ADMIN PANEL ⚙️
@@ -1385,7 +1385,7 @@ bot.action('owner', async (ctx) => {
 └ /listowner → Daftar owner
 
 ${config.settings.footer}`,
-        ,
+        parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1400,7 +1400,7 @@ bot.action('whatsapp', async (ctx) => {
   try {
     await ctx.deleteMessage();
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
        📱 WHATSAPP TOOLS 📱
@@ -1421,7 +1421,7 @@ Kirim file .txt berisi daftar nomor
 untuk cek bio secara massal.
 
 ${config.settings.footer}`,
-        ,
+        parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1436,7 +1436,7 @@ bot.action('more', async (ctx) => {
   try {
     await ctx.deleteMessage();
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
        📦 FITUR LAINNYA 📦
@@ -1460,7 +1460,7 @@ bot.action('more', async (ctx) => {
     → Statistik referral kamu
 
 ${config.settings.footer}`,
-        ,
+        parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [{ text: '◀️ Kembali ke Menu', callback_data: 'back_to_start' }]
         ])
@@ -1498,10 +1498,10 @@ cepat, akurat, dan mudah digunakan.
 ${config.settings.footer}`;
 
     await ctx.replyWithPhoto(
-      { source: './database/levinz.jpg' },
+      { source: './database/profile.jpg' },
       {
         caption,
-        ,
+        parse_mode: 'HTML',
         ...Markup.inlineKeyboard([
           [
             { text: '⚙️ Admin Panel', callback_data: 'owner' },
