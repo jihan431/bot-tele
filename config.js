@@ -1,7 +1,7 @@
 module.exports = {
     version: "1.7",
     ownerId: 8563283239,
-    channelId: "@brynzly",
+    channelId: "@ffek",
     groupId: "", // Isi dengan @usernamegroup jika ada
     namaBot: "cekbiometa_bot",
     usernameOwner: "@FEEEKEK",

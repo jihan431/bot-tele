@@ -116,19 +116,19 @@ module.exports = async (ctx) => {
       { source: outPath },
       {
         caption: `━━━━━━━━━━━━━━━━━━━━━
-      👤 <b>USER INFORMATION</b> 👤
+      👤 USER INFORMATION 👤
 ━━━━━━━━━━━━━━━━━━━━━
 
 ┌─────────────────────
 │ ◈ Nama: ${name}
 │ ◈ Username: ${username}
-│ ◈ ID: <code>${userId}</code>
+│ ◈ ID: ${userId}
 │ ◈ Lang: id
 └─────────────────────
 
-🔗 <a href="https://t.me/${username.replace('@', '')}">Profil Telegram</a>
+🔗 Profil: https://t.me/${username.replace('@', '')}
 
-<i>${config.settings.footer}</i>`,
+${config.settings.footer}`,
         parse_mode: 'HTML'
       }
     );

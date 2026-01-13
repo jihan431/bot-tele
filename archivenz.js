@@ -332,8 +332,8 @@ function generatePagedList(items, page = 1, type = "premium") {
   const pagedItems = items.slice(startIndex, startIndex + perPage);
 
   let text = type === "owner"
-    ? "<blockquote>👑 <b>Daftar Owner</b>\n━━━━━━━━━━━━━━━━━━\n</blockquote>"
-    : "<blockquote>📜 <b>Daftar User Premium</b>\n━━━━━━━━━━━━━━━━━━\n</blockquote>";
+    ? "👑 Daftar Owner\n━━━━━━━━━━━━━━━━━━\n"
+    : "📜 Daftar User Premium\n━━━━━━━━━━━━━━━━━━\n";
 
   for (const user of pagedItems) {
     const { id, expireAt, startAt } = user;
@@ -343,10 +343,10 @@ function generatePagedList(items, page = 1, type = "premium") {
     const akhir = formatDate(expireAt);
     const durasi = getDurationText(expireAt, startAt);
 
-    text += `<blockquote>👤 <b>ID:</b> <code>${id}</code>\n⏱ <b>Durasi:</b> ${durasi}\n📅 <b>Tanggal:</b> ${mulai} - ${akhir}\n</blockquote>`;
+    text += `👤 ID: ${id}\n⏱ Durasi: ${durasi}\n📅 Tanggal: ${mulai} - ${akhir}\n`;
   }
 
-  text += `<blockquote>📄 Halaman ${page} / ${totalPages}</blockquote>`;
+  text += `📄 Halaman ${page} / ${totalPages}`;
 
   const buttons = [];
   if (page > 1) buttons.push({ text: "◀️ Prev", callback_data: `${type}_page_${page - 1}` });
@@ -361,13 +361,13 @@ function generateUserList(users, page = 1) {
   const startIndex = (page - 1) * perPage;
   const pageIds = users.slice(startIndex, startIndex + perPage);
 
-  let text = `<blockquote><b>📊 Total ID Terdaftar</b>\n━━━━━━━━━━━━━━━━━━\n</blockquote>`;
+  let text = `📊 Total ID Terdaftar\n━━━━━━━━━━━━━━━━━━\n`;
 
   pageIds.forEach((id, index) => {
-    text += `<blockquote>${startIndex + index + 1}. <code>${id}</code>\n</blockquote>`;
+    text += `${startIndex + index + 1}. ${id}\n`;
   });
 
-  text += `<blockquote>📄 <b>Halaman:</b> ${page} / ${totalPages}\n👥 <b>Total ID:</b> ${users.length}</blockquote>`;
+  text += `📄 Halaman: ${page} / ${totalPages}\n👥 Total ID: ${users.length}`;
 
   const buttons = [];
   if (page > 1) buttons.push({ text: "◀️ Prev", callback_data: `users_page_${page - 1}` });
@@ -537,7 +537,7 @@ async function startWhatsAppClient() {
           
           if (isPNG) {
             await bot.telegram.sendPhoto(qrRequesterId, { source: qrBuffer }, {
-              caption: `<blockquote>📱 <b>QR CODE WHATSAPP</b>\n\nScan QR ini di WhatsApp:\n<b>Pengaturan → Perangkat Tertaut → Tautkan Perangkat</b>\n\n⏳ QR berlaku 60 detik!</blockquote>`,
+              caption: `📱 QR CODE WHATSAPP\n\nScan QR ini di WhatsApp:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat\n\n⏳ QR berlaku 60 detik!`,
               parse_mode: 'HTML'
             });
           } else {
@@ -545,7 +545,7 @@ async function startWhatsAppClient() {
             await bot.telegram.sendDocument(qrRequesterId, 
               { source: qrBuffer, filename: 'qrcode.svg' }, 
               {
-                caption: `<blockquote>📱 <b>QR CODE WHATSAPP</b>\n\nScan QR ini di WhatsApp:\n<b>Pengaturan → Perangkat Tertaut → Tautkan Perangkat</b>\n\n⏳ QR berlaku 60 detik!\n\n💡 <i>Buka file SVG ini untuk melihat QR code</i></blockquote>`,
+                caption: `📱 QR CODE WHATSAPP\n\nScan QR ini di WhatsApp:\nPengaturan → Perangkat Tertaut → Tautkan Perangkat\n\n⏳ QR berlaku 60 detik!\n\n💡 Buka file SVG ini untuk melihat QR code`,
                 parse_mode: 'HTML'
               }
             );
@@ -579,7 +579,7 @@ async function startWhatsAppClient() {
             if (qrRequesterId) {
                 try {
                     await bot.telegram.sendMessage(qrRequesterId, 
-                        `<blockquote>✅ <b>WHATSAPP TERHUBUNG!</b>\n\nBot sekarang sudah terhubung ke WhatsApp dan siap digunakan.</blockquote>`,
+                        `✅ WHATSAPP TERHUBUNG!\n\nBot sekarang sudah terhubung ke WhatsApp dan siap digunakan.`,
                         { parse_mode: 'HTML' }
                     );
                 } catch (e) {}
@@ -714,11 +714,11 @@ async function handleBioCheck(ctx, numbersToCheck) {
   }
 
   if (!numbersToCheck || numbersToCheck.length === 0) {
-    return ctx.reply(`<blockquote>Mana nomor yang mau dicek?</blockquote>`, { parse_mode: 'HTML' });
+    return ctx.reply(`Mana nomor yang mau dicek?`, { parse_mode: 'HTML' });
   }
 
   await ctx.reply(
-    `<blockquote>⏳ Tunggu sebentar, bot sedang mengecek ${numbersToCheck.length} nomor...</blockquote>`,
+    `⏳ Tunggu sebentar, bot sedang mengecek ${numbersToCheck.length} nomor...`,
     { parse_mode: 'HTML' }
   );
 
@@ -1342,7 +1342,7 @@ cepat, akurat, dan mudah digunakan.
       }
     );
     await ctx.replyWithAudio(
-      { source: './database/Sharontol.mp3' },
+      { source: './database/notif.mp3' },
     {
       title: 'Welcome',
       performer: config.settings.namabot,
